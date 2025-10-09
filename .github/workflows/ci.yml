@@ -1,3 +1,5 @@
+# .github/workflows/ci.yml
+
 name: CI Pipeline - Linter, Tests & Validation
 
 on:
@@ -18,23 +20,25 @@ jobs:
         with:
           python-version: '3.11'
 
+      # ... (pasos de instalación de uv y dependencias)
       - name: Install uv
         run: pip install uv
-
       - name: Get uv cache directory
         id: uv-cache-dir
         run: echo "dir=$(uv cache dir)" >> $GITHUB_OUTPUT
-
       - name: Cache uv dependencies
         uses: actions/cache@v4
         with:
           path: ${{ steps.uv-cache-dir.outputs.dir }}
           key: ${{ runner.os }}-uv-${{ hashFiles('**/requirements.txt') }}
-
       - name: Install dependencies
         run: uv pip install -r requirements.txt --system
 
+      # --- ESTE ES EL PASO CRÍTICO ---
+      # Usa el secreto para dar acceso a DVC
       - name: Pull DVC tracked data
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: dvc pull
 
       - name: Lint code with Ruff
