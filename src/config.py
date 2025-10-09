@@ -16,8 +16,19 @@ AUTOML_SUMMARY_REPORT_PATH = REPORTS_DIR / "automl_summary.txt"
 MAIN_LOG_PATH = REPORTS_DIR / "main.log"
 FEATURE_IMPORTANCE_PLOT_PATH = REPORTS_DIR / "feature_importance.png"
 FEATURES = [
-    "CRIM", "ZN", "INDUS", "CHAS", "NOX", "RM", "AGE", "DIS", "RAD", "TAX",
-    "PTRATIO", "B", "LSTAT"
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
 ]
 
 # --- Training Parameters ---

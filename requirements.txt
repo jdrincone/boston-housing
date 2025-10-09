@@ -5,16 +5,19 @@ numpy
 matplotlib
 
 # AutoML & Explainability
-flaml[automl]==2.3.6
+flaml[automl]==2.1.2
 shap
-
-# Versioning
-dvc[gdrive] # o s3, azure, etc.
+xgboost==2.0.3
 
 # API
 fastapi
 uvicorn[standard]
-pydantic<2.0
+pydantic
 
 # Config
 PyYAML
+
+# Testing
+pytest
+httpx
+ruff

@@ -10,6 +10,7 @@ from src.config import TRAIN_FILE, MODEL_PATH, MODEL_DIR, METRICS_PATH
 
 logger = logging.getLogger(__name__)
 
+
 def load_dataset(*, file_name: str) -> pd.DataFrame:
     """Loads a CSV file from the data directory."""
     path = Path(TRAIN_FILE.parent, file_name)
@@ -18,12 +19,14 @@ def load_dataset(*, file_name: str) -> pd.DataFrame:
     logger.info("Dataset loaded: shape=%s", df.shape)
     return df
 
+
 def save_pipeline(*, pipeline_to_persist: object) -> None:
     """Saves the pipeline to the models directory."""
     logger.info("Saving pipeline to %s", MODEL_PATH)
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
     joblib.dump(pipeline_to_persist, MODEL_PATH)
     logger.info("Pipeline saved to: %s", MODEL_PATH)
+
 
 def load_pipeline() -> object:
     """Loads the trained pipeline."""
@@ -34,6 +37,7 @@ def load_pipeline() -> object:
     pipeline = joblib.load(MODEL_PATH)
     logger.info("Pipeline loaded from: %s", MODEL_PATH)
     return pipeline
+
 
 def save_metrics(*, metrics: Dict) -> None:
     """Saves model metrics to the main metrics.json file."""

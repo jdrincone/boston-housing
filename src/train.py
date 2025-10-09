@@ -30,7 +30,7 @@ file_handler = logging.FileHandler(MAIN_LOG_PATH)
 file_handler.setLevel(logging.INFO)
 stream_handler = logging.StreamHandler(sys.stdout)
 stream_handler.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(formatter)
 stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -49,8 +49,9 @@ def run_training() -> None:
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE
     )
-    logger.info(f"Data split complete. Train shape: {X_train.shape}, Test shape: {X_test.shape}")
-
+    logger.info(
+        f"Data split complete. Train shape: {X_train.shape}, Test shape: {X_test.shape}"
+    )
 
     pipeline = create_pipeline()
     logger.info("Training the pipeline with AutoML (logs will be shown)...")
@@ -74,7 +75,9 @@ def run_training() -> None:
             "rmse": np.sqrt(mean_squared_error(y_test, y_pred_test)),
             "mae": mean_absolute_error(y_test, y_pred_test),
         },
-        "best_model_name": pipeline.named_steps["regressor"].model.estimator.__class__.__name__,
+        "best_model_name": pipeline.named_steps[
+            "regressor"
+        ].model.estimator.__class__.__name__,
     }
 
     logger.info(f"  Best Model: {metrics['best_model_name']}")
@@ -85,11 +88,15 @@ def run_training() -> None:
     logger.info("Building and saving summary report...")
     automl = pipeline.named_steps["regressor"]
     preprocessor = Pipeline(pipeline.steps[:-1])
-    X_train_processed = pd.DataFrame(preprocessor.transform(X_train), columns=X_train.columns)
+    X_train_processed = pd.DataFrame(
+        preprocessor.transform(X_train), columns=X_train.columns
+    )
     final_model = automl.model.estimator
 
     summary = [
-        "=" * 50, "      AutoML Final Summary Report", "=" * 50,
+        "=" * 50,
+        "      AutoML Final Summary Report",
+        "=" * 50,
         f"\nBest Model Found: {final_model.__class__.__name__}",
         f"Best R2 Score (during CV): {-automl.best_loss:.4f}",
         "\n--- Best Model Configuration ---",
@@ -97,14 +104,17 @@ def run_training() -> None:
     ]
 
     importances = []
-    if hasattr(final_model, 'feature_importances_'):
-        importances = sorted(zip(
-            X_train.columns,
-            final_model.feature_importances_),
-            key=lambda x: x[1], reverse=True)
+    if hasattr(final_model, "feature_importances_"):
+        importances = sorted(
+            zip(X_train.columns, final_model.feature_importances_),
+            key=lambda x: x[1],
+            reverse=True,
+        )
 
         summary.append("\n--- Feature Importances (from final model) ---")
-        summary.extend([f"  - {feature}: {importance:.4f}" for feature, importance in importances])
+        summary.extend(
+            [f"  - {feature}: {importance:.4f}" for feature, importance in importances]
+        )
 
     with open(AUTOML_SUMMARY_REPORT_PATH, "w") as f:
         f.write("\n".join(summary))
@@ -127,7 +137,8 @@ def run_training() -> None:
         logger.info(f"Feature Importance plot saved to: {FEATURE_IMPORTANCE_PLOT_PATH}")
     else:
         logger.warning(
-            "Final model does not have 'feature_importances_'. Skipping model-based feature importance plot.")
+            "Final model does not have 'feature_importances_'. Skipping model-based feature importance plot."
+        )
 
     logger.info("Generating SHAP feature importance plot...")
     if not isinstance(X_train_processed, pd.DataFrame):

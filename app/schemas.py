@@ -1,8 +1,9 @@
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
+
 
 class HousingFeatures(BaseModel):
-    # --- Features Relevantes (Obligatorias) ---
+    # --- Features (sin cambios) ---
     RM: float
     LSTAT: float
     DIS: float
@@ -13,13 +14,13 @@ class HousingFeatures(BaseModel):
     INDUS: float
     PTRATIO: float
     NOX: float
-    # --- Features Menos Relevantes (Opcionales) ---
     RAD: Optional[int] = None
     CHAS: Optional[int] = None
     ZN: Optional[float] = None
 
-    class Config:
-        schema_extra = {
+    # --- SINTAXIS ACTUALIZADA A PYDANTIC V2 ---
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "CRIM": 0.02731,
                 "ZN": 0.0,
@@ -33,6 +34,7 @@ class HousingFeatures(BaseModel):
                 "TAX": 242,
                 "PTRATIO": 17.8,
                 "B": 396.9,
-                "LSTAT": 9.14
+                "LSTAT": 9.14,
             }
         }
+    )

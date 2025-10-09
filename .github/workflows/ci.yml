@@ -1,0 +1,54 @@
+name: CI Pipeline - Linter, Tests & Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # --- MEJORA: Caché de dependencias para acelerar el proceso ---
+      - name: Get uv cache directory
+        id: uv-cache-dir
+        run: echo "dir=$(uv cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache uv dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.uv-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-uv-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
+
+      - name: Install uv and dependencies
+        run: |
+          pip install uv
+          uv pip install -r requirements.txt
+
+      - name: Set up DVC
+        uses: iterative/setup-dvc@v1
+
+      - name: Pull DVC tracked data
+        run: dvc pull
+
+      # --- NUEVO: Paso de Linting para calidad de código ---
+      - name: Lint code with Ruff
+        run: ruff check .
+
+      # --- CAMBIO CLAVE: Usamos el mismo comando que funciona localmente ---
+      - name: Run Tests with Pytest
+        run: python -m pytest
+
+      - name: Check DVC Reproducibility
+        run: dvc repro -f
