@@ -25,3 +25,7 @@ automl.log
 dist/
 build/
 *.egg-info/
+
+# Secrets
+gdrive-credentials.json
+.secrets
