@@ -1,0 +1,61 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python -m src.train
+    deps:
+    - path: data/HousingData.csv
+      hash: md5
+      md5: 9d9460d994e88c868ee98ea23e6c4111
+      size: 35008
+    - path: src/config.py
+      hash: md5
+      md5: 682f4ec4d1be18c5663d9e19a982f7f1
+      size: 845
+    - path: src/data_manager.py
+      hash: md5
+      md5: 07a103c39caeb23939c848b07d360eff
+      size: 1669
+    - path: src/pipeline.py
+      hash: md5
+      md5: 852d02f5f1774003094e64243d609e40
+      size: 943
+    - path: src/processing/transformers.py
+      hash: md5
+      md5: fd8d239ef146533aa0c2df3b9538b932
+      size: 490
+    - path: src/train.py
+      hash: md5
+      md5: 957205f507e930c4002192593055702d
+      size: 6392
+    params:
+      params.yaml:
+        train:
+          test_size: 0.2
+          random_state: 42
+          automl_budget_secs: 60
+          target: MEDV
+    outs:
+    - path: models/best_pipeline.pkl
+      hash: md5
+      md5: a4165e379a437f0b195b011eb6df8d49
+      size: 285756
+    - path: reports/automl_summary.txt
+      hash: md5
+      md5: dcbc5bc2db785edbe531daf4a53e7d67
+      size: 743
+    - path: reports/feature_importance.png
+      hash: md5
+      md5: bfd4f148ad49f2ec4e6912bd7696f76a
+      size: 22762
+    - path: reports/main.log
+      hash: md5
+      md5: 0922d22771d06c436181b404a2085bf6
+      size: 1415
+    - path: reports/metrics.json
+      hash: md5
+      md5: eea31da3d68f47137957958702c491c8
+      size: 371
+    - path: reports/shap_summary.png
+      hash: md5
+      md5: 2319357613c8c632260548aaa9647ecd
+      size: 74435

@@ -1,0 +1,27 @@
+# Environments
+.venv/
+venv/
+env/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# DVC files
+.dvc/cache
+.dvc/tmp
+.dvc/lock
+
+# Generated logs
+automl.log
+
+# IDE config
+.idea/
+.vscode/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/

@@ -1,0 +1,26 @@
+stages:
+  train:
+    cmd: python -m src.train
+    deps:
+      - src/train.py
+      - src/pipeline.py
+      - src/config.py
+      - src/data_manager.py
+      - src/processing/transformers.py
+      - data/HousingData.csv
+    params:
+      - train
+    outs:
+      - models/best_pipeline.pkl:
+          cache: true
+      - reports/shap_summary.png:
+          cache: true
+      - reports/feature_importance.png:
+          cache: true
+      - reports/automl_summary.txt:
+          cache: true
+      - reports/main.log:
+          cache: false
+    metrics:
+      - reports/metrics.json:
+          cache: false

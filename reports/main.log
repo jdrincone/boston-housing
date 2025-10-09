@@ -1,0 +1,19 @@
+2025-10-09 14:54:08,648 - INFO - 🚀 Starting the training process...
+2025-10-09 14:54:08,648 - INFO - Loading and splitting data...
+2025-10-09 14:54:08,652 - INFO - Data split complete. Train shape: (404, 13), Test shape: (102, 13)
+2025-10-09 14:54:08,652 - INFO - ⚙️  Training the pipeline with AutoML (logs will be shown)...
+2025-10-09 14:55:08,691 - INFO - ✅ AutoML training complete.
+2025-10-09 14:55:08,691 - INFO - 
+--- 📊 Detailed Model Evaluation ---
+2025-10-09 14:55:08,694 - INFO -   Best Model: LGBMRegressor
+2025-10-09 14:55:08,694 - INFO -   Train R^2 Score: 0.9727
+2025-10-09 14:55:08,694 - INFO -   Test R^2 Score: 0.9011
+2025-10-09 14:55:08,694 - INFO - Building and saving summary report...
+2025-10-09 14:55:08,695 - INFO - ✅ AutoML summary report saved to: /Users/juandavidrincon/Documents/prueba/boston-housing/reports/automl_summary.txt
+2025-10-09 14:55:08,695 - INFO - 
+📊 Generating Feature Importance plot (model-based)...
+2025-10-09 14:55:08,850 - INFO - ✅ Feature Importance plot saved to: /Users/juandavidrincon/Documents/prueba/boston-housing/reports/feature_importance.png
+2025-10-09 14:55:08,850 - INFO - 
+🎨 Generating SHAP feature importance plot...
+2025-10-09 14:55:09,054 - INFO - ✅ SHAP plot saved to: /Users/juandavidrincon/Documents/prueba/boston-housing/reports/shap_summary.png
+2025-10-09 14:55:09,079 - INFO - 🎉 Training pipeline finished successfully!
