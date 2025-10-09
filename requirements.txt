@@ -16,6 +16,8 @@ pydantic
 
 # Config
 PyYAML
+# Versioning
+dvc[gdrive]
 
 # Testing
 pytest
