@@ -288,6 +288,86 @@ El pipeline valida:
 
 ---
 
+## 🔄 CT Reentreno Automático del Modelo
+
+El proyecto incluye un **workflow de reentreno automático** que actualiza el modelo periódicamente y mantiene los artefactos sincronizados.
+
+### Configuración del Reentreno
+
+El archivo `.github/workflows/retrain_model.yml` define el pipeline de reentreno que incluye:
+
+#### **Triggers**
+- **Manual**: `workflow_dispatch` - Ejecución manual desde GitHub Actions
+- **Automático**: Cada **3 días a las 02:00 UTC** - Reentreno programado
+
+#### **Pasos del Reentreno**
+
+1. **Checkout completo del repositorio**
+   ```yaml
+   - Checkout repository (actions/checkout@v4)
+   - fetch-depth: 0  # Historial completo para DVC
+   ```
+
+2. **Configuración del entorno**
+   ```yaml
+   - Set up Python 3.11 (actions/setup-python@v5)
+   - Install uv
+   - Install dependencies with uv sync
+   ```
+
+3. **Autenticación DVC con AWS S3**
+   ```yaml
+   - Configure AWS Credentials
+   - Set up DVC remote (s3://tst-d3af097f)
+   - Configure access keys
+   ```
+
+4. **Reentreno y sincronización**
+   ```yaml
+   - dvc repro --force  # Reentreno forzado
+   - dvc push          # Subir nuevos artefactos
+   ```
+
+### Ejecutar Reentreno Manual
+
+#### Desde GitHub Actions
+1. Ve a **Actions** → **Retrain Model**
+2. Haz clic en **Run workflow**
+3. Selecciona la rama y ejecuta
+
+#### Desde línea de comandos
+```bash
+# Reentreno local
+dvc repro --force
+
+# Subir cambios
+dvc push
+```
+
+### Artefactos Actualizados
+
+El reentreno actualiza automáticamente:
+- ✅ **Modelo**: `models/best_pipeline.pkl`
+- ✅ **Métricas**: `reports/metrics.json`
+- ✅ **Reportes**: SHAP plots, feature importance
+- ✅ **Logs**: `reports/main.log`
+- ✅ **Datos**: Train/backtest splits si cambian
+
+### Monitoreo del Reentreno
+
+- **Historial**: Disponible en GitHub Actions
+- **Logs**: Detallados en cada ejecución
+- **Notificaciones**: Configurables por email/Slack
+- **Estado**: Visible en el dashboard de GitHub
+
+### Configuración de Secrets
+
+Los mismos secrets del CI/CD son necesarios:
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+
+---
+
 ## 📊 Backtesting del Modelo
 
 El proyecto incluye un sistema de **backtesting** que permite evaluar el rendimiento del modelo en datos no vistos mediante llamadas a la API en producción.
