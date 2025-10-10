@@ -89,3 +89,17 @@ boston-housing/
 ├── requirements.txt
 └── README.md
 
+
+Levanta los servicios:
+Desde la raíz del proyecto, ejecuta el siguiente comando:
+
+Bash
+
+docker-compose up --build
+Este comando construye la imagen de la API y levanta los contenedores de la API y la base de datos.
+
+La API estará disponible en http://localhost:8000.
+
+
+Reentreno del modelo
+dvc repro --force

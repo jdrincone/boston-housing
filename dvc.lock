@@ -47,8 +47,8 @@ stages:
     outs:
     - path: models/best_pipeline.pkl
       hash: md5
-      md5: bb4a9ec1413499d650a627d0d99a5ef5
-      size: 546699
+      md5: 328a7d6343244ddcf067f6e7f5b363d1
+      size: 524507
     - path: reports/automl_summary.txt
       hash: md5
       md5: 87527393587b35482139870782de2f5c
@@ -59,16 +59,16 @@ stages:
       size: 22513
     - path: reports/main.log
       hash: md5
-      md5: 3f0cdf67645dd4c802695221c649b26d
+      md5: 31181cd453cb7d062c8efd7d9afde3e7
       size: 1367
     - path: reports/metrics.json
       hash: md5
-      md5: d649ca0850a1c4a428331dda5cae390c
-      size: 377
+      md5: 44321645264a835db9f0c15c166a3512
+      size: 378
     - path: reports/shap_summary.png
       hash: md5
-      md5: 27aedd62bccfd867a8d8c9757150bce1
-      size: 72234
+      md5: a3cb86498ff6f8117ab54da2f8053da7
+      size: 72535
   prepare_data:
     cmd: python3 scripts/prepare_data.py
     deps:
