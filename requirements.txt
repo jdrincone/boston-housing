@@ -1,0 +1,34 @@
+# Core
+pandas
+scikit-learn==1.3.2
+numpy
+matplotlib
+
+# AutoML & Explainability
+flaml[automl]==2.1.2
+shap
+xgboost==2.0.3
+
+# API
+fastapi
+uvicorn[standard]
+pydantic
+
+# Config
+PyYAML
+
+# Versioning
+dvc[s3]
+
+# Drift
+evidently
+
+
+# Database
+sqlalchemy
+psycopg2-binary
+
+# Testing
+pytest
+httpx
+ruff

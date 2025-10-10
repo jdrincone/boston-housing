@@ -1,0 +1,38 @@
+stages:
+  prepare_data:
+    cmd: python3 scripts/prepare_data.py
+    deps:
+      - scripts/prepare_data.py
+      - data/HousingData.csv
+    params:
+      - backtest.split_size
+      - train.random_state
+      - train.target
+    outs:
+      - data/train_data.csv
+      - data/backtest_data.csv
+
+  train:
+    cmd: python3 -m src.train
+    deps:
+      - src/train.py
+      - src/pipeline.py
+      - src/config.py
+      - src/data_manager.py
+      - data/train_data.csv
+    params:
+      - train
+    outs:
+      - models/best_pipeline.pkl:
+          cache: true
+      - reports/shap_summary.png:
+          cache: true
+      - reports/feature_importance.png:
+          cache: true
+      - reports/automl_summary.txt:
+          cache: true
+      - reports/main.log:
+          cache: false
+    metrics:
+      - reports/metrics.json:
+          cache: false

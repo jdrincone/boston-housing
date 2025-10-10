@@ -1,0 +1,22 @@
+backtest:
+  split_size: 0.05 # 5% de los datos para backtesting
+
+train:
+  test_size: 0.2
+  random_state: 42
+  automl_budget_secs: 60
+  target: 'MEDV'
+  features:
+    - "CRIM"
+    - "ZN"
+    - "INDUS"
+    - "CHAS"
+    - "NOX"
+    - "RM"
+    - "AGE"
+    - "DIS"
+    - "RAD"
+    - "TAX"
+    - "PTRATIO"
+    - "B"
+    - "LSTAT"

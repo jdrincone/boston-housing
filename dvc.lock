@@ -1,0 +1,96 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python3 -m src.train
+    deps:
+    - path: data/train_data.csv
+      hash: md5
+      md5: 0211fc8a327d431eeefa7b6d98282d6d
+      size: 34818
+    - path: src/config.py
+      hash: md5
+      md5: 0a5da3329bc0aee1e0258dcfef010357
+      size: 923
+    - path: src/data_manager.py
+      hash: md5
+      md5: bc34aa74c8a2a0cfe87afa5a73fdc3c6
+      size: 1673
+    - path: src/pipeline.py
+      hash: md5
+      md5: 7a29b5e105ff34850d0c1645f2a38b75
+      size: 802
+    - path: src/train.py
+      hash: md5
+      md5: e702e0e5e5975f238f0f6a4d31322130
+      size: 5778
+    params:
+      params.yaml:
+        train:
+          test_size: 0.2
+          random_state: 42
+          automl_budget_secs: 60
+          target: MEDV
+          features:
+          - CRIM
+          - ZN
+          - INDUS
+          - CHAS
+          - NOX
+          - RM
+          - AGE
+          - DIS
+          - RAD
+          - TAX
+          - PTRATIO
+          - B
+          - LSTAT
+    outs:
+    - path: models/best_pipeline.pkl
+      hash: md5
+      md5: 4b53b030c468666e0065972772ce75d8
+      size: 531867
+    - path: reports/automl_summary.txt
+      hash: md5
+      md5: 87527393587b35482139870782de2f5c
+      size: 583
+    - path: reports/feature_importance.png
+      hash: md5
+      md5: 795b79152dbd6efbcb4c187995c52033
+      size: 22513
+    - path: reports/main.log
+      hash: md5
+      md5: c363506fb8240a9fd7c143c4054ad9e4
+      size: 1367
+    - path: reports/metrics.json
+      hash: md5
+      md5: febfc89d1af84be2dd251b81e7e12507
+      size: 377
+    - path: reports/shap_summary.png
+      hash: md5
+      md5: 686985810fce936de61863e7591998d5
+      size: 72231
+  prepare_data:
+    cmd: python3 scripts/prepare_data.py
+    deps:
+    - path: data/HousingData.csv
+      hash: md5
+      md5: 9d9460d994e88c868ee98ea23e6c4111
+      size: 35008
+    - path: scripts/prepare_data.py
+      hash: md5
+      md5: 3a34b629091d71546c75a63587149005
+      size: 1950
+    params:
+      params.yaml:
+        backtest.split_size: 0.05
+        train.random_state: 42
+        train.target: MEDV
+    outs:
+    - path: data/backtest_data.csv
+      hash: md5
+      md5: 989bd23a7578b20d832e970b25919929
+      size: 1932
+    - path: data/train_data.csv
+      hash: md5
+      md5: 0211fc8a327d431eeefa7b6d98282d6d
+      size: 34818

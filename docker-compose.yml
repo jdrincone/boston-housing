@@ -1,0 +1,28 @@
+
+version: '3.8'
+
+services:
+  # Servicio de la DB
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/ # Persiste los datos de la BD
+    environment:
+      - POSTGRES_USER=boston_user
+      - POSTGRES_PASSWORD=boston_password
+      - POSTGRES_DB=boston_predictions
+    ports:
+      - "5432:5432"
+
+  # Servicio de la API
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://boston_user:boston_password@db/boston_predictions
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

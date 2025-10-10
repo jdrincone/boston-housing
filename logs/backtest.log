@@ -1,0 +1,22 @@
+2025-10-09 22:10:32,365 - INFO - Iniciando el proceso de backtesting...
+2025-10-09 22:10:32,365 - CRITICAL - Ha ocurrido un error inesperado durante el backtesting: [Errno 2] No such file or directory: 'src/data/backtesting_data.csv'
+Traceback (most recent call last):
+  File "/Users/juandavidrincon/Documents/prueba/boston-housing/scripts/backtesting.py", line 34, in run_backtest
+    data = pd.read_csv(BACKTEST_DATA_PATH)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/juandavidrincon/Documents/prueba/boston-housing/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/juandavidrincon/Documents/prueba/boston-housing/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/juandavidrincon/Documents/prueba/boston-housing/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/juandavidrincon/Documents/prueba/boston-housing/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "/Users/juandavidrincon/Documents/prueba/boston-housing/.venv/lib/python3.11/site-packages/pandas/io/common.py", line 873, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'src/data/backtesting_data.csv'
