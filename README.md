@@ -17,6 +17,7 @@ Pipeline **MLOps end-to-end** para entrenar y desplegar un modelo de **regresió
 - [🧪 Testing](#-testing)
 - [📈 Características del Modelo](#-características-del-modelo)
 - [📈 Presentación PDF-Explicativa](#-Presentación PDF-Explicativa)
+- [uso de herramientas AI](#-uso de herramientas AI)
 
 ---
 
@@ -121,6 +122,10 @@ boston-housing/
 │   ├── HousingData.csv           # Dataset original
 │   ├── train_data.csv            # Datos de entrenamiento
 │   └── backtest_data.csv         # Datos de backtesting
+├── docs/                         # 📊 Documentos Explicativos y Diagramación
+│   ├── boston_housing_presentation.pdf           
+    ....
+
 ├── models/                       # 🎯 Modelos (DVC tracked)
 │   └── best_pipeline.pkl         # Pipeline completo serializado
 ├── reports/                      # 📈 Reportes (DVC tracked)
@@ -356,3 +361,10 @@ dvc remote modify myremote access_key_id TU_ACCESS_KEY
 dvc remote modify myremote secret_access_key TU_SECRET_KEY
 ```
 
+## Herramientas de IA usadas (breve)
+
+* **Mermaid (mermaidchart)**: para **diagramar** la arquitectura, el pipeline (DVC) y los flujos de predicción/serving de forma rápida y editable en texto.
+* **Cursor**: asistente de código y redacción técnica para **borradores de README y documentación**. Útil para iterar rápido, aunque **siempre validando y corrigiendo** lo que sugiere (evita “inventos”).
+* **Gemini**: apoyo para **estructurar el flujo en DVC** (stages, dependencias y artefactos), proponiendo esquemas que luego se ajustaron al contexto real del repo.
+
+**Conclusión:** estas herramientas no sustituyen la verificación técnica, pero son una **gran ayuda para aterrizar ideas y prototipos con velocidad**, reduciendo tiempo en primeras versiones de diagramas, documentación y estructura del pipeline.
