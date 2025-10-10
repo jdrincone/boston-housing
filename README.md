@@ -122,6 +122,10 @@ boston-housing/
 │   ├── HousingData.csv           # Dataset original
 │   ├── train_data.csv            # Datos de entrenamiento
 │   └── backtest_data.csv         # Datos de backtesting
+├── docs/                         # 📊 Documentos Explicativos y Diagramación
+│   ├── boston_housing_presentation.pdf           
+    ....
+
 ├── models/                       # 🎯 Modelos (DVC tracked)
 │   └── best_pipeline.pkl         # Pipeline completo serializado
 ├── reports/                      # 📈 Reportes (DVC tracked)
