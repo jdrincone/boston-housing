@@ -2,7 +2,6 @@ import pandas as pd
 import requests
 import os
 import logging
-from typing import Dict, Any
 
 from src.config import BACKTEST_FILE, REPORTS_DIR
 
