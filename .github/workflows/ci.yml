@@ -10,6 +10,23 @@ on:
 jobs:
   validate-and-test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13-alpine
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        # Opción para esperar a que la BD esté lista
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,17 +36,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install uv
-        run: pip install uv
-
-      - name: Cache uv dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/uv # Ruta de caché correcta para uv
-          key: ${{ runner.os }}-uv-${{ hashFiles('**/requirements.txt') }}
-
-      - name: Install dependencies
-        run: uv pip install -r requirements.txt --system
+      - name: Install uv and dependencies
+        run: |
+          pip install uv
+          uv pip install -r requirements.txt --system
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -45,4 +55,6 @@ jobs:
         run: ruff check .
 
       - name: Run Tests with Pytest
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/test_db
         run: python -m pytest
