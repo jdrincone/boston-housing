@@ -8,6 +8,10 @@ Pipeline **MLOps end-to-end** para entrenar y desplegar un modelo de **regresió
 
 ![Pipeline de Datos](docs/HousingData-2025-10-10-041429.svg)
 
+# Monitoreo de Drift
+![Monitoreo Drift](docs/drift.png)
+![Informe](reports/drift.html)
+
 ## 🚀 Tecnologías
 
 - **API**: FastAPI + Uvicorn  
@@ -106,6 +110,8 @@ boston-housing/
 │   ├── feature_importance.png    # Importancia de features
 │   ├── automl_summary.txt        # Resumen de AutoML
 │   └── main.log                  # Logs de entrenamiento
+│   └── drift.html                # Reporte de Drift---Monitoreo
+└──   backtest_report.html        # Resultado de Backtesting ---Monitoreo
 ├── tests/                        # Tests unitarios
 │   ├── test_api.py               # Tests de la API
 │   └── test_training.py          # Tests del pipeline
