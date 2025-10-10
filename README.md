@@ -308,7 +308,8 @@ El script `scripts/backtesting.py` realiza las siguientes operaciones:
 docker-compose up --build
 
 # En otra terminal, ejecuta el backtesting
-python scripts/backtesting.py
+python -m scripts.backtesting
+
 ```
 
 ### Archivos Generados
