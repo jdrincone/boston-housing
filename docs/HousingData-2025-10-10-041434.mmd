@@ -1,0 +1,45 @@
+---
+config:
+  layout: dagre
+---
+flowchart TD
+ subgraph DATA["Datos & Versionado"]
+        D1["Descargar datos con DVC data/HousingData.csv"]
+        D2["División de datos prepare_data.py"]
+        D3["data/train_data.csv & data/backtest_data.csv"]
+  end
+ subgraph TRAIN["Entrenamiento & Modelado"]
+        T1["Entrenar pipeline ML FLAML AutoML train.py"]
+        T2["Modelo entrenado models/best_pipeline.pkl"]
+        T3["Reportes & métricas reports/metrics.json, .png, .log"]
+  end
+ subgraph ARTIFACTS["Artefactos versionados"]
+        A1["Versionar artefactos DVC push/pull"]
+  end
+ subgraph API["Despliegue API"]
+        P1["Contenerización Docker/Docker Compose"]
+        P2["API FastAPI + Uvicorn"]
+        P3["Base de datos PostgreSQL: Almacena peticiones al servicio"]
+  end
+ subgraph MONITOR["Monitoreo & Backtesting"]
+        M1["Logs & métricas reports/"]
+        M2["Backtesting backtesting.py"]
+        M3["Reporte detallado backtest_report.csv"]
+  end
+    D1 --> D2
+    D2 --> D3
+    D3 --> T1
+    T1 --> T2 & T3
+    T2 --> A1 & P2
+    T3 --> A1
+    A1 --> P1
+    P1 --> P2
+    P2 -- conecta --> P3
+    P2 --> M1
+    M1 --> M2
+    M2 --> M3
+    style DATA fill:#C8E6C9
+    style ARTIFACTS fill:#C8E6C9
+    style TRAIN fill:#FFCDD2
+    style API fill:#BBDEFB
+    style MONITOR fill:#E1BEE7

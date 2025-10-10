@@ -4,6 +4,10 @@ Pipeline **MLOps end-to-end** para entrenar y desplegar un modelo de **regresió
 
 ---
 
+# Visualización del Pipeline
+
+![Pipeline de Datos](docs/HousingData-2025-10-10-041429.svg)
+
 ## 🚀 Tecnologías
 
 - **API**: FastAPI + Uvicorn  
@@ -291,6 +295,8 @@ El pipeline valida:
 ## 🔄 CT Reentreno Automático del Modelo
 
 El proyecto incluye un **workflow de reentreno automático** que actualiza el modelo periódicamente y mantiene los artefactos sincronizados.
+
+
 
 ### Configuración del Reentreno
 
