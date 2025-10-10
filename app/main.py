@@ -38,9 +38,6 @@ def predict(payload: HousingFeatures, db: Session = Depends(get_db)):
 
     try:
         prediction_value = pipeline.predict(input_df)[0]
-
-        # --- CAMBIO CLAVE: Convertir claves a minúsculas ---
-        # Creamos un nuevo diccionario con las claves en minúscula para que coincida con el modelo de la BD.
         prediction_inputs = {key.lower(): value for key, value in payload.model_dump().items()}
 
         db_prediction = database.Prediction(
@@ -56,6 +53,6 @@ def predict(payload: HousingFeatures, db: Session = Depends(get_db)):
         return {"prediction": prediction_value}
 
     except Exception as e:
-        logger.error(f"Prediction error: {e}", exc_info=True)  # exc_info=True da más detalles del error
+        logger.error(f"Prediction error: {e}", exc_info=True)
         db.rollback()
         raise HTTPException(status_code=400, detail=f"Prediction error: {str(e)}")
