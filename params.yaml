@@ -1,3 +1,6 @@
+backtest:
+  split_size: 0.05 # 5% de los datos para backtesting
+
 train:
   test_size: 0.2
   random_state: 42
