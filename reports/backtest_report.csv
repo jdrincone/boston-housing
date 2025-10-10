@@ -1,5 +1,5 @@
 id,actual_value,predicted_value,payload_sent,error
-0,18.6,19.58378591991466,"{'CRIM': 0.22876, 'ZN': 0.0, 'INDUS': 8.56, 'CHAS': 0.0, 'NOX': 0.52, 'RM': 6.405, 'AGE': 85.4, 'DIS': 2.7147, 'RAD': 5.0, 'TAX': 384.0, 'PTRATIO': 20.9, 'B': 70.8, 'LSTAT': 10.63}",
+0,18.6,19.583785919914664,"{'CRIM': 0.22876, 'ZN': 0.0, 'INDUS': 8.56, 'CHAS': 0.0, 'NOX': 0.52, 'RM': 6.405, 'AGE': 85.4, 'DIS': 2.7147, 'RAD': 5.0, 'TAX': 384.0, 'PTRATIO': 20.9, 'B': 70.8, 'LSTAT': 10.63}",
 1,29.1,27.635555555555555,"{'CRIM': 0.01439, 'ZN': 60.0, 'INDUS': 2.93, 'CHAS': 0.0, 'NOX': 0.401, 'RM': 6.604, 'AGE': 18.8, 'DIS': 6.2196, 'RAD': 1.0, 'TAX': 265.0, 'PTRATIO': 15.6, 'B': 376.7, 'LSTAT': 4.38}",
 2,33.2,32.955493827160495,"{'CRIM': 0.0686, 'ZN': 0.0, 'INDUS': 2.89, 'CHAS': 0.0, 'NOX': 0.445, 'RM': 7.416, 'AGE': 62.5, 'DIS': 3.4952, 'RAD': 2.0, 'TAX': 276.0, 'PTRATIO': 18.0, 'B': 396.9, 'LSTAT': 6.19}",
 3,13.8,,,Out of range float values are not JSON compliant
@@ -8,7 +8,7 @@ id,actual_value,predicted_value,payload_sent,error
 6,22.6,,,Out of range float values are not JSON compliant
 7,11.9,,,Out of range float values are not JSON compliant
 8,35.4,,,Out of range float values are not JSON compliant
-9,20.1,19.03032000407001,"{'CRIM': 13.0751, 'ZN': 0.0, 'INDUS': 18.1, 'CHAS': 0.0, 'NOX': 0.58, 'RM': 5.713, 'AGE': 56.7, 'DIS': 2.8237, 'RAD': 24.0, 'TAX': 666.0, 'PTRATIO': 20.2, 'B': 396.9, 'LSTAT': 14.76}",
+9,20.1,19.030320004070006,"{'CRIM': 13.0751, 'ZN': 0.0, 'INDUS': 18.1, 'CHAS': 0.0, 'NOX': 0.58, 'RM': 5.713, 'AGE': 56.7, 'DIS': 2.8237, 'RAD': 24.0, 'TAX': 666.0, 'PTRATIO': 20.2, 'B': 396.9, 'LSTAT': 14.76}",
 10,22.2,,,Out of range float values are not JSON compliant
 11,32.4,32.245489417989425,"{'CRIM': 0.05644, 'ZN': 40.0, 'INDUS': 6.41, 'CHAS': 1.0, 'NOX': 0.447, 'RM': 6.758, 'AGE': 32.9, 'DIS': 4.0776, 'RAD': 4.0, 'TAX': 254.0, 'PTRATIO': 17.6, 'B': 396.9, 'LSTAT': 3.53}",
 12,22.7,20.46981025360336,"{'CRIM': 5.20177, 'ZN': 0.0, 'INDUS': 18.1, 'CHAS': 1.0, 'NOX': 0.77, 'RM': 6.127, 'AGE': 83.4, 'DIS': 2.7227, 'RAD': 24.0, 'TAX': 666.0, 'PTRATIO': 20.2, 'B': 395.43, 'LSTAT': 11.48}",

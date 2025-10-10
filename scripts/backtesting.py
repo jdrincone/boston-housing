@@ -2,15 +2,16 @@ import pandas as pd
 import requests
 import os
 import logging
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 from src.config import BACKTEST_FILE, REPORTS_DIR
 
-# Configuración
 API_URL = "http://localhost:8000/predict"
 OUTPUT_REPORT_PATH = REPORTS_DIR / "backtest_report.csv"
+METRICS_REPORT_PATH = REPORTS_DIR / "metrics_summary.csv"
 LOG_FILE_PATH = REPORTS_DIR / "backtest.log"
 
-# Configurar logging
+
 os.makedirs(os.path.dirname(LOG_FILE_PATH), exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
@@ -29,26 +30,15 @@ def run_backtest():
     """
     try:
         logging.info("Iniciando el proceso de backtesting...")
-
-        # 1. Cargar los datos de backtesting
-        if not BACKTEST_FILE.exists():
-            raise FileNotFoundError(f"Archivo de datos no encontrado: {BACKTEST_FILE}")
-
-        data = pd.read_csv(BACKTEST_FILE)
+        data = pd.read_csv(BACKTEST_FILE,)
         logging.info(f"Cargados {len(data)} registros para backtesting.")
 
-        # Asegurarse de que el directorio de salida existe
         os.makedirs(OUTPUT_REPORT_PATH.parent, exist_ok=True)
-
-        # 2. Inicializar la lista para guardar los resultados
         results = []
-
-        # 3. Iterar sobre cada fila de datos, enviar a la API y obtener la predicción
         for index, row in data.iterrows():
             payload = row.drop('MEDV').to_dict()
 
             try:
-                print(payload)
                 response = requests.post(API_URL, json=payload)
                 response.raise_for_status()
 
@@ -82,11 +72,39 @@ def run_backtest():
                     "error": "Campo de predicción faltante en la respuesta"
                 })
 
-        # 4. Crear un DataFrame de los resultados y guardarlo en un CSV
         results_df = pd.DataFrame(results)
         results_df.to_csv(OUTPUT_REPORT_PATH, index=False)
 
-        logging.info(f"Backtesting completado. Informe guardado en: {OUTPUT_REPORT_PATH}")
+        if not results_df.empty and 'predicted_value' in results_df and 'actual_value' in results_df:
+            valid_results = results_df.dropna(subset=['predicted_value'])
+
+            if not valid_results.empty:
+                mae = mean_absolute_error(valid_results['actual_value'], valid_results['predicted_value'])
+                mse = mean_squared_error(valid_results['actual_value'], valid_results['predicted_value'])
+
+                # Crear un DataFrame para las métricas
+                metrics_df = pd.DataFrame([{
+                    "mae": mae,
+                    "mse": mse,
+                    "num_predictions": len(valid_results)
+                }])
+
+                if os.path.exists(METRICS_REPORT_PATH):
+                    existing_metrics_df = pd.read_csv(METRICS_REPORT_PATH)
+                    metrics_df = pd.concat([existing_metrics_df, metrics_df], ignore_index=True)
+
+                metrics_df.to_csv(METRICS_REPORT_PATH, index=False)
+
+                logging.info("--- Resumen de Métricas del Backtesting ---")
+                logging.info(f"MAE (Mean Absolute Error): {mae:.2f}")
+                logging.info(f"MSE (Mean Squared Error): {mse:.2f}")
+                logging.info("----------------------------------------")
+            else:
+                logging.warning("No hay predicciones válidas para calcular métricas.")
+        else:
+            logging.warning("El DataFrame de resultados está vacío o faltan columnas.")
+
+        logging.info(f"Backtesting completado. Informe de backtesting guardado en: {OUTPUT_REPORT_PATH}")
 
     except Exception as e:
         logging.critical(f"Ha ocurrido un error inesperado durante el backtesting: {e}", exc_info=True)

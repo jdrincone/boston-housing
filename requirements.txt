@@ -19,7 +19,9 @@ PyYAML
 
 # Versioning
 dvc[s3]
-kaggle
+
+# Drift
+evidently
 
 
 # Database
