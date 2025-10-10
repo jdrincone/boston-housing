@@ -1,12 +1,11 @@
 stages:
   train:
-    cmd: python -m src.train
+    cmd: python3 -m src.train
     deps:
       - src/train.py
       - src/pipeline.py
       - src/config.py
       - src/data_manager.py
-      - src/processing/transformers.py
       - data/HousingData.csv
     params:
       - train

@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   train:
-    cmd: python -m src.train
+    cmd: python3 -m src.train
     deps:
     - path: data/HousingData.csv
       hash: md5
@@ -9,20 +9,16 @@ stages:
       size: 35008
     - path: src/config.py
       hash: md5
-      md5: ca7d07b437cc280b8d570b695a9e20e7
-      size: 1009
+      md5: 5599a76a6e419ea1038baf261c712023
+      size: 1039
     - path: src/data_manager.py
       hash: md5
       md5: bc34aa74c8a2a0cfe87afa5a73fdc3c6
       size: 1673
     - path: src/pipeline.py
       hash: md5
-      md5: 1eb51d1e5ff23c07a23f14dd051295d1
-      size: 903
-    - path: src/processing/transformers.py
-      hash: md5
-      md5: d99fe16af81a6482c2064ff6de60efb4
-      size: 475
+      md5: 7a29b5e105ff34850d0c1645f2a38b75
+      size: 802
     - path: src/train.py
       hash: md5
       md5: e702e0e5e5975f238f0f6a4d31322130
@@ -34,11 +30,25 @@ stages:
           random_state: 42
           automl_budget_secs: 60
           target: MEDV
+          features:
+          - CRIM
+          - ZN
+          - INDUS
+          - CHAS
+          - NOX
+          - RM
+          - AGE
+          - DIS
+          - RAD
+          - TAX
+          - PTRATIO
+          - B
+          - LSTAT
     outs:
     - path: models/best_pipeline.pkl
       hash: md5
-      md5: 17dfc85c6f34faee8abaf0bc635db95b
-      size: 290731
+      md5: e5e1a601938dbf4ee24a1aded2dea6bb
+      size: 294341
     - path: reports/automl_summary.txt
       hash: md5
       md5: dcbc5bc2db785edbe531daf4a53e7d67
@@ -49,7 +59,7 @@ stages:
       size: 22762
     - path: reports/main.log
       hash: md5
-      md5: 229aa63718586746f76df8e1d4552c50
+      md5: 969d8946b24e951255374dc816255ee8
       size: 1362
     - path: reports/metrics.json
       hash: md5
@@ -57,5 +67,5 @@ stages:
       size: 371
     - path: reports/shap_summary.png
       hash: md5
-      md5: 776a8c33eb2a761487c4a6b0cf32bbd2
-      size: 74447
+      md5: 33560cc51c7289c28870a1529b279305
+      size: 74315

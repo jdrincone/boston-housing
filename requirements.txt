@@ -16,8 +16,15 @@ pydantic
 
 # Config
 PyYAML
+
 # Versioning
 dvc[s3]
+kaggle
+
+
+# Database
+sqlalchemy
+psycopg2-binary
 
 # Testing
 pytest

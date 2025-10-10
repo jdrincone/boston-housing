@@ -15,21 +15,7 @@ METRICS_PATH = REPORTS_DIR / "metrics.json"
 AUTOML_SUMMARY_REPORT_PATH = REPORTS_DIR / "automl_summary.txt"
 MAIN_LOG_PATH = REPORTS_DIR / "main.log"
 FEATURE_IMPORTANCE_PLOT_PATH = REPORTS_DIR / "feature_importance.png"
-FEATURES = [
-    "CRIM",
-    "ZN",
-    "INDUS",
-    "CHAS",
-    "NOX",
-    "RM",
-    "AGE",
-    "DIS",
-    "RAD",
-    "TAX",
-    "PTRATIO",
-    "B",
-    "LSTAT",
-]
+
 
 # --- Training Parameters ---
 with open(BASE_DIR / "params.yaml", "r") as f:
@@ -39,3 +25,4 @@ TARGET = params["target"]
 TEST_SIZE = params["test_size"]
 RANDOM_STATE = params["random_state"]
 AUTOML_TIME_BUDGET = params["automl_budget_secs"]
+FEATURES = params["features"]

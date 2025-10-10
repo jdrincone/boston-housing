@@ -4,8 +4,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 from src.config import RANDOM_STATE, AUTOML_TIME_BUDGET
-from src.processing import transformers as t
-
 
 def create_pipeline() -> Pipeline:
     """Ensambla y devuelve el pipeline completo de Scikit-learn."""
@@ -21,7 +19,6 @@ def create_pipeline() -> Pipeline:
 
     price_prediction_pipeline = Pipeline(
         [
-            ("fix_column_names", t.ColumnNameFixer()),
             ("imputer", SimpleImputer(strategy="median")),
             ("scaler", StandardScaler()),
             ("regressor", AutoML(**automl_settings)),
